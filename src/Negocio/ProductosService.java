@@ -49,17 +49,22 @@ public class ProductosService {
         return producto;
     }
     
-    public void elimninarProducto(int nproducto) {
+    
+    
+    public void elimninarProducto(int nproducto,NegociosService ventaNegocio) {
+        
+       
         try {
             Producto productoEliminar = null;
             //Eliminamos de ventas el producto seleccionado
             List<Venta> ventasEliminar = new ArrayList();
-            for (Venta v : ventas) {
+            
+            for (Venta v : ventaNegocio.getVentas()) {
                 if (v.getProducto().getId() == nproducto) {
                     ventasEliminar.add(v);
                 }
             }
-            ventas.removeAll(ventasEliminar);
+            ventaNegocio.getVentas().removeAll(ventasEliminar);
 
             //Eliminamos el producto
             for (Producto p : productos) {

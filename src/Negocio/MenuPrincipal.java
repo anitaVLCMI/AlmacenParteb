@@ -10,21 +10,24 @@ import Modelo.Producto;
 import Modelo.Televisor;
 import Modelo.TipoMayorista;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Date;
+
 import java.util.Locale;
 import java.util.Scanner;
 
 public class MenuPrincipal {
 
     NegociosService servicio;
-    ProductosService producto;
+    ProductosService productoServicios;
+    ClientesService clientesServicios;
+    
 
     MenuPrincipal() {
-        Producto =new ProductosService();
+        clientesServicios=new ClientesService();
+        productoServicios = new ProductosService();
         servicio = new NegociosService();
     }
 
@@ -75,20 +78,20 @@ public class MenuPrincipal {
 
                 if (opcionProductos == 1) {
                     Producto p = datosProducto();
-                    servicio.introducirProducto(p);
+                    productoServicios.introducirProducto(p);
                 }
                 if (opcionProductos == 2) {
                     System.out.println("Introduzca el número de producto: ");
                     int num = sc.nextInt();
-                    servicio.elimninarProducto(num);
+                    productoServicios.elimninarProducto(num, servicio);
                 }
                 if (opcionProductos == 3) {
                     System.out.println("Introduzca el número de producto: ");
                     int nprod = sc.nextInt();
-                    System.out.println(servicio.buscarProducto(nprod).imprimirProducto());
+                    System.out.println(productoServicios.buscarProducto(nprod).imprimirProducto());
                 }
                 if (opcionProductos == 4) {
-                    System.out.println(servicio.imprimirTodosProductos());
+                    System.out.println(productoServicios.imprimirTodosProductos());
                 }
 
             } while (opcionProductos != 0);
@@ -471,7 +474,7 @@ public class MenuPrincipal {
                     System.out.println("Introduzca número de venta: ");
                     nv = Integer.parseInt(sc.nextLine());
                     System.out.println(servicio.buscarVenta(nv).imprimirVenta());
-                    
+
                 }
                 if (opcionVentas.equals("4")) {
                     System.out.println(servicio.imprimirtodasVentas());

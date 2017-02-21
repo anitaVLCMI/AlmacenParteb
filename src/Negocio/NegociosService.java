@@ -23,6 +23,11 @@ public class NegociosService {
         ventas = new ArrayList();
     }
 
+    public List<Venta> getVentas() {
+        return ventas;
+    }
+    
+
     public void introducirProducto(Producto p) {
 
         try {
@@ -40,6 +45,7 @@ public class NegociosService {
         }
 
     }
+    
 
     public void introducirVenta(int ncliente, int nproducto, String vend) {
         try {
@@ -69,6 +75,7 @@ public class NegociosService {
             v.setVendedor(vend);
             v.setProducto(productoVenta);
             v.setPrecioVenta(); //calcula el precio de la venta segun el cliente-mayorista
+            
 
             ventas.add(v);
 
